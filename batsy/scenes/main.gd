@@ -24,7 +24,11 @@ func _ready():
 	ground_width = $Ground1.get_child(0).texture.get_width()  # Assuming the TextureRect is the first child of Ground1
 	$Ground2.position.x = $Ground1.position.x + ground_width  # Position the second ground next to the first
 	ground_height = $Ground1.get_node("Sprite2D").texture.get_height()
-	new_game()
+	#new_game()
+	# Start in game-over state (as if the player had already lost)
+	game_running = false
+	game_over = true  # Set game_over so the player can't interact yet
+	$Menu.show()  # Show the death menu at the start
 	
 func new_game():
 	game_running = false
