@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctr4xrn30g813"]
+
+[ext_resource type="Script" path="res://scenes/bat.gd" id="1_o0ox5"]
+[ext_resource type="Texture2D" uid="uid://gvqxp3tmwktr" path="res://assets/bat1.png" id="1_okqni"]
+[ext_resource type="Texture2D" uid="uid://cibcbr0nawgeg" path="res://assets/bat2.png" id="2_hoyec"]
+[ext_resource type="Texture2D" uid="uid://bsxbmh22yn3fm" path="res://assets/bat3.png" id="3_giwwi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8sgn5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_okqni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hoyec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_giwwi")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ljvrm"]
+height = 20.0
+
+[node name="Bat" type="CharacterBody2D"]
+script = ExtResource("1_o0ox5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8sgn5")
+animation = &"flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ljvrm")

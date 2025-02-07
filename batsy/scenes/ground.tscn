@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba0kry2xri14v"]
+
+[ext_resource type="Texture2D" uid="uid://d2r5udeqy3bug" path="res://assets/batFloor.png" id="1_inorq"]
+[ext_resource type="Script" path="res://scenes/ground.gd" id="1_mslap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2nbp"]
+size = Vector2(2160.5, 239)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfrpp"]
+size = Vector2(2160.5, 239)
+
+[node name="Ground" type="Area2D"]
+script = ExtResource("1_mslap")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1080, 1902)
+scale = Vector2(1, 1.61905)
+texture = ExtResource("1_inorq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1078.75, 1911.5)
+shape = SubResource("RectangleShape2D_m2nbp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1076, 90.0001)
+rotation = -3.14159
+scale = Vector2(1, 1.61905)
+texture = ExtResource("1_inorq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(1074.75, 73.5)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_mfrpp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuddmfascq5sa"]
+
+[ext_resource type="Script" path="res://scenes/rock.gd" id="1_4cwpo"]
+[ext_resource type="Texture2D" uid="uid://v320gqjfxhu8" path="res://assets/rock8.png" id="1_fnmna"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oodwu"]
+size = Vector2(78, 3422)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_4cwpo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(547, 825)
+scale = Vector2(6.95312, 7.53125)
+texture = ExtResource("1_fnmna")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(552, 642)
+polygon = PackedVector2Array(-29, -40, -200, 51, -219, 260, -110, 374, 90, 336, 180, 322, 209, 108, 28, -49, 28, -49)
+
+[node name="ScoreArea" type="Area2D" parent="."]
+position = Vector2(5, -34)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(804, 869)
+shape = SubResource("RectangleShape2D_oodwu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

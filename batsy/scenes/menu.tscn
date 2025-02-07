@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bej7tnaf5ib7h"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_qtou2"]
+[ext_resource type="Texture2D" uid="uid://72tvrltg3ud1" path="res://assets/buttonP.png" id="2_o8ylp"]
+[ext_resource type="Texture2D" uid="uid://dvwk2jyjmcn5k" path="res://assets/Button.png" id="3_b1wof"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wltmr"]
+texture = ExtResource("2_o8ylp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kdp0n"]
+texture = ExtResource("2_o8ylp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb7s2"]
+texture = ExtResource("3_b1wof")
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_qtou2")
+
+[node name="Play" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.5
+offset_top = -98.5
+offset_right = 238.5
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+theme_override_styles/hover = SubResource("StyleBoxTexture_wltmr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kdp0n")
+theme_override_styles/normal = SubResource("StyleBoxTexture_sb7s2")
+text = "PLAY"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

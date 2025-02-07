@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqs377a5t1a7h"]
+
+[ext_resource type="Script" path="res://scenes/ground.gd" id="1_tfsid"]
+[ext_resource type="Texture2D" uid="uid://d2r5udeqy3bug" path="res://assets/batFloor.png" id="1_wk7qu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbmwv"]
+size = Vector2(2160.5, 239)
+
+[node name="Roof" type="Area2D"]
+script = ExtResource("1_tfsid")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1076, 90.0001)
+rotation = -3.14159
+scale = Vector2(1, 1.61905)
+texture = ExtResource("1_wk7qu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(1074.75, 73.5)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_nbmwv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
