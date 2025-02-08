@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bej7tnaf5ib7h"]
+[gd_scene load_steps=13 format=3 uid="uid://bej7tnaf5ib7h"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_qtou2"]
 [ext_resource type="Texture2D" uid="uid://72tvrltg3ud1" path="res://assets/buttonP.png" id="2_o8ylp"]
@@ -11,6 +11,24 @@ texture = ExtResource("2_o8ylp")
 texture = ExtResource("2_o8ylp")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb7s2"]
+texture = ExtResource("3_b1wof")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_itu0v"]
+texture = ExtResource("2_o8ylp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eit0g"]
+texture = ExtResource("2_o8ylp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vnr6k"]
+texture = ExtResource("3_b1wof")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xm16f"]
+texture = ExtResource("2_o8ylp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kbcux"]
+texture = ExtResource("2_o8ylp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ngr5h"]
 texture = ExtResource("3_b1wof")
 
 [node name="Menu" type="CanvasLayer"]
@@ -34,4 +52,28 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_kdp0n")
 theme_override_styles/normal = SubResource("StyleBoxTexture_sb7s2")
 text = "PLAY"
 
+[node name="Shop" type="Button" parent="."]
+offset_left = 287.0
+offset_top = 1129.0
+offset_right = 785.0
+offset_bottom = 1308.0
+theme_override_font_sizes/font_size = 100
+theme_override_styles/hover = SubResource("StyleBoxTexture_itu0v")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_eit0g")
+theme_override_styles/normal = SubResource("StyleBoxTexture_vnr6k")
+text = "Shop"
+
+[node name="CharacterSelect" type="Button" parent="."]
+offset_left = 307.0
+offset_top = 1396.0
+offset_right = 769.0
+offset_bottom = 1570.0
+theme_override_font_sizes/font_size = 100
+theme_override_styles/hover = SubResource("StyleBoxTexture_xm16f")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kbcux")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ngr5h")
+text = "Skin"
+
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Shop" to="." method="_on_shop_pressed"]
+[connection signal="pressed" from="CharacterSelect" to="." method="_on_character_select_pressed"]

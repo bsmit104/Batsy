@@ -1,0 +1,6 @@
+[
+    {"name": "Avg Joe shchmo", "id": "default", "image": "res://characters/character_A/bat1.png", "price": 0},
+    {"name": "Avg Joe", "id": "character_A", "image": "res://characters/character_A/bat1.png", "price": 50},
+    {"name": "Grey Bat", "id": "character_B", "image": "res://characters/character_B/bat1.png", "price": 75},
+    {"name": "Ice Bat", "id": "character_C", "image": "res://characters/character_C/bat1.png", "price": 75}
+]

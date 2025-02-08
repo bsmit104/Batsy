@@ -7,7 +7,7 @@ var game_running : bool
 var game_over : bool
 var scroll
 var score
-const SCROLL_SPEED : int = 10
+const SCROLL_SPEED : int = 20
 var screen_size : Vector2i
 var rocks : Array
 const ROCK_DELAY : int = 50
@@ -37,16 +37,43 @@ func new_game():
 	scroll = 0
 	$ScoreLabel.text = "SCORE: " + str(score)
 	$Menu.hide()
-	
+
 	# Reset object pool
 	for rock in rock_pool:
 		rock.queue_free()
 	rock_pool.clear()
 	rocks.clear()
-	
-	rocks.clear()
+
+	# Reset last rock position for proper spacing
+	last_rock_x = 0
+
 	generate_rocks()
+
+	# Reload the selected character in case the player changed it
+	$Bat.selected_character = Global.selected_character
+	$Bat.load_character_animation()
 	$Bat.reset()
+
+#func new_game():
+	#game_running = false
+	#game_over = false
+	#score = 0
+	#scroll = 0
+	#$ScoreLabel.text = "SCORE: " + str(score)
+	#$Menu.hide()
+	#
+	## Reset object pool
+	#for rock in rock_pool:
+		#rock.queue_free()
+	#rock_pool.clear()
+	#rocks.clear()
+	#
+	## **Reset last_rock_x to ensure proper spawning**
+	#last_rock_x = 0  # Reset to the leftmost screen edge
+	#
+	##rocks.clear()
+	#generate_rocks()
+	#$Bat.reset()
 	
 func _input(event):
 	if game_over == false:
@@ -128,31 +155,6 @@ func generate_rocks():
 	# Update last rock position
 	last_rock_x = rock.position.x
 
-#func generate_rocks():
-	#if rock_scenes.is_empty():
-		#return  # Prevent errors if no rock scenes are assigned
-#
-	## Pick a random rock formation from the list
-	#var rock_scene = rock_scenes[randi() % rock_scenes.size()]
-	##var rock = rock_scene.instantiate()
-	#var rock = get_pooled_rock()
-	#rock.show()
-	#rock.set_process(true)
-	#
-	## Ensure consistent spacing between rocks
-	#var min_x = last_rock_x + ROCK_SPACING_X
-	#rock.position.x = max(screen_size.x + ROCK_DELAY, min_x)
-	#
-	#rock.position.y = (screen_size.y - ground_height) / 2 + randi_range(-ROCK_RANGE, ROCK_RANGE)
-	#rock.hit.connect(bat_hit)
-	#rock.scored.connect(scored)
-	#
-	#add_child(rock)
-	#rocks.append(rock)
-#
-	## Update last rock position
-	#last_rock_x = rock.position.x
-
 func scored():
 	score += 1
 	$ScoreLabel.text = "SCORE: " + str(score)
@@ -181,6 +183,34 @@ func _on_ground_2_hit() -> void:
 	$Bat.falling = true
 	stop_game()
 
-
 func _on_menu_restart() -> void:
 	new_game()
+
+
+
+
+
+#func generate_rocks():
+	#if rock_scenes.is_empty():
+		#return  # Prevent errors if no rock scenes are assigned
+#
+	## Pick a random rock formation from the list
+	#var rock_scene = rock_scenes[randi() % rock_scenes.size()]
+	##var rock = rock_scene.instantiate()
+	#var rock = get_pooled_rock()
+	#rock.show()
+	#rock.set_process(true)
+	#
+	## Ensure consistent spacing between rocks
+	#var min_x = last_rock_x + ROCK_SPACING_X
+	#rock.position.x = max(screen_size.x + ROCK_DELAY, min_x)
+	#
+	#rock.position.y = (screen_size.y - ground_height) / 2 + randi_range(-ROCK_RANGE, ROCK_RANGE)
+	#rock.hit.connect(bat_hit)
+	#rock.scored.connect(scored)
+	#
+	#add_child(rock)
+	#rocks.append(rock)
+#
+	## Update last rock position
+	#last_rock_x = rock.position.x

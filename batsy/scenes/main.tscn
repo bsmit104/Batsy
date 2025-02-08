@@ -29,7 +29,7 @@ grow_vertical = 2
 texture = ExtResource("1_cv7r1")
 
 [node name="Bat" parent="." instance=ExtResource("2_p0kex")]
-position = Vector2(100, 385)
+position = Vector2(329, 721)
 scale = Vector2(6, 6)
 
 [node name="Ground1" parent="." instance=ExtResource("5_7y6h7")]
