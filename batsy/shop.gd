@@ -15,6 +15,11 @@ func load_character_data():
 	var file = FileAccess.open("res://characters.json", FileAccess.READ)
 	character_data = JSON.parse_string(file.get_as_text())
 
+#adding
+func update_shop_coins():
+	$CoinsLabel.text = "Coins: " + str(coins)
+#
+
 func update_shop():
 	var container = $CharacterScroll/CharacterList
 	for child in container.get_children():

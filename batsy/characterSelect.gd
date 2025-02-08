@@ -34,7 +34,6 @@
 	#get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 
-
 extends Control
 
 var owned_characters = ["default"]
@@ -61,6 +60,12 @@ func update_character_list():
 			var hbox = HBoxContainer.new()
 			hbox.add_theme_constant_override("separation", 20)
 
+			# Character Image (added image for character)
+			var image = TextureRect.new()
+			image.texture = load(character["image"])
+			image.custom_minimum_size = Vector2(128, 128)  # Adjust size of image
+			hbox.add_child(image)
+
 			# Character Name Label
 			var label = Label.new()
 			label.text = character["name"]
@@ -82,15 +87,11 @@ func update_character_list():
 
 			container.add_child(hbox)
 
-#
-	## Save selection globally (optional)
-	#Global.selected_character = selected_character
 func _on_character_selected(character):
 	selected_character = character["id"]
 	Global.selected_character = selected_character  # Save globally
 	save_selected_character()
 	update_character_list()  # Refresh UI
-
 
 func save_selected_character():
 	var file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
@@ -114,12 +115,6 @@ func load_data():
 			selected_character = saved_data["selected_character"]
 
 
-
-
-
-
-
-#
 #extends Control
 #
 #var owned_characters = ["default"]
@@ -160,12 +155,13 @@ func load_data():
 			#button.connect("pressed", Callable(self, "_on_character_selected").bind(character))
 			#hbox.add_child(button)
 #
-			## Highlight selected character
+			## Check if this character is selected
 			#if character["id"] == selected_character:
 				#button.text = "Equipped"
 				#button.disabled = true
 #
 			#container.add_child(hbox)
+#
 ##
 	### Save selection globally (optional)
 	##Global.selected_character = selected_character
@@ -174,6 +170,7 @@ func load_data():
 	#Global.selected_character = selected_character  # Save globally
 	#save_selected_character()
 	#update_character_list()  # Refresh UI
+#
 #
 #func save_selected_character():
 	#var file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
@@ -188,3 +185,10 @@ func load_data():
 		#var file = FileAccess.open("user://shop_save.json", FileAccess.READ)
 		#var data = JSON.parse_string(file.get_as_text())
 		#owned_characters = data["owned_characters"]
+#
+	## Load selected character from savegame.json
+	#if FileAccess.file_exists("user://savegame.json"):
+		#var file = FileAccess.open("user://savegame.json", FileAccess.READ)
+		#var saved_data = JSON.parse_string(file.get_as_text())
+		#if saved_data is Dictionary and "selected_character" in saved_data:
+			#selected_character = saved_data["selected_character"]
