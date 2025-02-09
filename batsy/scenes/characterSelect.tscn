@@ -46,6 +46,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="Back" type="Button" parent="."]
+layout_mode = 0
 offset_left = 725.0
 offset_top = 22.0
 offset_right = 1025.0
