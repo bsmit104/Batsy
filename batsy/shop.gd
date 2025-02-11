@@ -65,6 +65,19 @@ func create_shop_item(character):
 	return hbox
 
 
+#func _on_buy_character(character):
+	#if character["id"] in owned_characters:
+		#return
+#
+	#if Global.totalcoins >= character["price"]:
+		#Global.totalcoins -= character["price"]
+		#owned_characters.append(character["id"])
+		#update_shop()
+		#update_coins_label()
+		#update_shop_coins()  # Update the coin count after purchase
+		##FIX ME SAVE FUNCTIONS INTERFERING WITH EACH OTHER PREVENTS COINS COLLECTED FROM BEING ADDED AFTER PURCHASE
+		#save_data()  # Save data to ensure coins are saved
+		#Global.save_data()
 func _on_buy_character(character):
 	if character["id"] in owned_characters:
 		return
@@ -74,37 +87,44 @@ func _on_buy_character(character):
 		owned_characters.append(character["id"])
 		update_shop()
 		update_coins_label()
-		update_shop_coins()  # Update the coin count after purchase
-		#FIX ME SAVE FUNCTIONS INTERFERING WITH EACH OTHER PREVENTS COINS COLLECTED FROM BEING ADDED AFTER PURCHASE
-		save_data()  # Save data to ensure coins are saved
-		Global.save_data()
+		update_shop_coins()
+		save_data()  # ✅ Now calls Global.save_data()
+
 
 func update_coins_label():
 	$CoinsLabel.text = "Coins: " + str(Global.totalcoins)
 
 
+#func save_data():
+	#var file = FileAccess.open("user://shop_save.json", FileAccess.WRITE)
+	##var data = {"coins": coins, "owned_characters": owned_characters}
+	#var data = {"coins": Global.totalcoins, "owned_characters": owned_characters}
+	#file.store_string(JSON.stringify(data))
+#
+	## Save owned characters to Global
+	#Global.owned_characters = owned_characters
+
 func save_data():
-	var file = FileAccess.open("user://shop_save.json", FileAccess.WRITE)
-	#var data = {"coins": coins, "owned_characters": owned_characters}
-	var data = {"coins": Global.totalcoins, "owned_characters": owned_characters}
-	file.store_string(JSON.stringify(data))
-
-	# Save owned characters to Global
 	Global.owned_characters = owned_characters
+	Global.save_data()  # Only call Global.save_data() to keep things consistent
 
+
+#func load_data():
+	#if FileAccess.file_exists("user://shop_save.json"):
+		#var file = FileAccess.open("user://shop_save.json", FileAccess.READ)
+		#var data = JSON.parse_string(file.get_as_text())
+		#
+		## Check if the parsed data is valid
+		#if data is Dictionary:
+			##coins = data.get("coins", 200)  # Default to 200 if missing
+			#Global.totalcoins = data.get("coins", 200)  # Default to 200 if missing
+			#owned_characters = data.get("owned_characters", ["default"])  # Default to just "default"
+		#else:
+			#print("Warning: Failed to load shop data, resetting to default.")
+			#reset_shop_data()  # Call function to reset
 func load_data():
-	if FileAccess.file_exists("user://shop_save.json"):
-		var file = FileAccess.open("user://shop_save.json", FileAccess.READ)
-		var data = JSON.parse_string(file.get_as_text())
-		
-		# Check if the parsed data is valid
-		if data is Dictionary:
-			#coins = data.get("coins", 200)  # Default to 200 if missing
-			Global.totalcoins = data.get("coins", 200)  # Default to 200 if missing
-			owned_characters = data.get("owned_characters", ["default"])  # Default to just "default"
-		else:
-			print("Warning: Failed to load shop data, resetting to default.")
-			reset_shop_data()  # Call function to reset
+	Global.load_data()  # ✅ Load global data
+	owned_characters = Global.owned_characters  # ✅ Sync owned characters
 
 # Function to reset shop data when file is missing/corrupted
 func reset_shop_data():

@@ -44,6 +44,7 @@ func new_game():
 	scroll = 0
 	coins = 0  # Reset the coins for the new game
 	$ScoreLabel.text = "SCORE: " + str(score)
+	$CoinLabel.text = "Coins: " + str(coins)
 	$CoinEarnedLabel.text = " "
 	$Menu.hide()
 
