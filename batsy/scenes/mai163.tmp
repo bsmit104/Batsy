@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://ex6oe7231dno"]
+
+[ext_resource type="Texture2D" uid="uid://dtbcyb220oury" path="res://assets/caveBG.png" id="1_cv7r1"]
+[ext_resource type="Texture2D" uid="uid://dmwviqlr0qe03" path="res://assets/bigCaveBG.png" id="1_fnulr"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_wtsry"]
+[ext_resource type="PackedScene" uid="uid://cuddmfascq5sa" path="res://scenes/rock_2.tscn" id="2_82ffw"]
+[ext_resource type="PackedScene" uid="uid://ctr4xrn30g813" path="res://scenes/bat.tscn" id="2_p0kex"]
+[ext_resource type="PackedScene" uid="uid://dxb78wd47lj3f" path="res://scenes/rock.tscn" id="2_qqkia"]
+[ext_resource type="PackedScene" uid="uid://ddfbl62h4odl2" path="res://scenes/rock_3.tscn" id="4_nd85y"]
+[ext_resource type="PackedScene" uid="uid://ba0kry2xri14v" path="res://scenes/ground.tscn" id="5_7y6h7"]
+[ext_resource type="PackedScene" uid="uid://dmujdku3ujoyf" path="res://scenes/coin.tscn" id="5_tiqpu"]
+[ext_resource type="PackedScene" uid="uid://dqs377a5t1a7h" path="res://scenes/roof.tscn" id="7_ykocr"]
+[ext_resource type="PackedScene" uid="uid://bej7tnaf5ib7h" path="res://scenes/menu.tscn" id="10_ppped"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_wtsry")
+rock_scenes = Array[PackedScene]([ExtResource("2_qqkia"), ExtResource("2_82ffw"), ExtResource("4_nd85y")])
+coin_scene = ExtResource("5_tiqpu")
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_fnulr")
+offset = Vector2(540, 960)
+
+[node name="BG" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cv7r1")
+
+[node name="Bat" parent="." instance=ExtResource("2_p0kex")]
+position = Vector2(329, 721)
+scale = Vector2(6, 6)
+
+[node name="Ground1" parent="." instance=ExtResource("5_7y6h7")]
+z_index = 1
+
+[node name="Ground2" parent="." instance=ExtResource("5_7y6h7")]
+z_index = 1
+
+[node name="Roof1" parent="." instance=ExtResource("7_ykocr")]
+visible = false
+
+[node name="Roof2" parent="." instance=ExtResource("7_ykocr")]
+visible = false
+
+[node name="RockTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 2
+offset_right = 403.0
+offset_bottom = 137.0
+theme_override_font_sizes/font_size = 100
+text = "SCORE: 0"
+
+[node name="Menu" parent="." instance=ExtResource("10_ppped")]
+
+[node name="CoinLabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -410.0
+offset_bottom = 118.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "Coins: 0"
+
+[node name="CoinEarnedLabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -734.0
+offset_top = 414.0
+offset_right = -324.0
+offset_bottom = 551.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 100
+
+[connection signal="hit" from="Ground1" to="." method="_on_ground_1_hit"]
+[connection signal="hit" from="Ground2" to="." method="_on_ground_2_hit"]
+[connection signal="hit" from="Roof1" to="." method="_on_roof_1_hit"]
+[connection signal="hit" from="Roof2" to="." method="_on_roof_2_hit"]
+[connection signal="timeout" from="RockTimer" to="." method="_on_rock_timer_timeout"]
+[connection signal="restart" from="Menu" to="." method="_on_menu_restart"]

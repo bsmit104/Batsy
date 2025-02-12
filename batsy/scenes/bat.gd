@@ -5,7 +5,7 @@ const MAX_VEL : int = 600
 const FLAP_SPEED : int = -550
 var flying : bool = false
 var falling : bool = false
-const START_POS = Vector2(300, 700)
+const START_POS = Vector2(100, 700)
 
 var selected_character = "default"  # Default character (global or hardcoded)
 

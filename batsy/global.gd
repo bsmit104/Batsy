@@ -13,19 +13,7 @@ func _ready():
 	# Load any existing saved data when the game starts
 	load_data()
 
-# Save the game data (in this case, the selected character)
-#func save_data():
-	#var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)  # Open file in write mode
-	#if file:
-		##var data = {"selected_character": selected_character}  # Data to save
-		#var data = {
-			#"selected_character": selected_character,
-			#"totalcoins": totalcoins  # Save the total coins
-		#}
-		#var json = JSON.new()  # Create an instance of JSON
-		#var json_string = json.stringify(data)  # Convert the dictionary to a JSON string
-		#file.store_string(json_string)  # Save the JSON string to the file
-		#file.close()  # Close the file
+
 func save_data():
 	var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
 	if file:
@@ -38,22 +26,6 @@ func save_data():
 		file.store_string(json_string)
 		file.close()
 
-
-
-# Load the game data (in this case, the selected character)
-#func load_data():
-	#if FileAccess.file_exists(SAVE_FILE_PATH):  # Check if the save file exists
-		#var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)  # Open file in read mode
-		#if file:
-			#var json_data = file.get_as_text()  # Read the file's contents as a text string
-			#file.close()  # Close the file
-			#var json = JSON.new()  # Create an instance of JSON
-			#var data = json.parse(json_data)  # Parse the JSON string into a dictionary
-			#if data is Dictionary:
-				#selected_character = data["selected_character"]  # Set the selected character
-				#totalcoins = data.get("totalcoins", 200)
-			#else:
-				#print("Failed to parse JSON data")
 func load_data():
 	if FileAccess.file_exists(SAVE_FILE_PATH):
 		var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
@@ -83,6 +55,7 @@ func reset_save():
 	# Reset in-memory values
 	selected_character = "default"
 	totalcoins = 200
+	owned_characters = ["default"]
 	
 	# Force reload to apply reset
 	get_tree().reload_current_scene()
@@ -111,7 +84,35 @@ func _input(event):
 
 
 
+# Save the game data (in this case, the selected character)
+#func save_data():
+	#var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)  # Open file in write mode
+	#if file:
+		##var data = {"selected_character": selected_character}  # Data to save
+		#var data = {
+			#"selected_character": selected_character,
+			#"totalcoins": totalcoins  # Save the total coins
+		#}
+		#var json = JSON.new()  # Create an instance of JSON
+		#var json_string = json.stringify(data)  # Convert the dictionary to a JSON string
+		#file.store_string(json_string)  # Save the JSON string to the file
+		#file.close()  # Close the file
 
+# Load the game data (in this case, the selected character)
+#func load_data():
+	#if FileAccess.file_exists(SAVE_FILE_PATH):  # Check if the save file exists
+		#var file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)  # Open file in read mode
+		#if file:
+			#var json_data = file.get_as_text()  # Read the file's contents as a text string
+			#file.close()  # Close the file
+			#var json = JSON.new()  # Create an instance of JSON
+			#var data = json.parse(json_data)  # Parse the JSON string into a dictionary
+			#if data is Dictionary:
+				#selected_character = data["selected_character"]  # Set the selected character
+				#totalcoins = data.get("totalcoins", 200)
+			#else:
+				#print("Failed to parse JSON data")
+				
 #extends Node
 #
 ## Store the currently selected character

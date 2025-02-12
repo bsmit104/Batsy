@@ -30,7 +30,7 @@ animations = [{
 radius = 72.0069
 
 [node name="Coin" type="Area2D"]
-position = Vector2(216, 857)
+position = Vector2(526, 1382)
 script = ExtResource("1_y633c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
