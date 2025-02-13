@@ -9,16 +9,40 @@
 	#if body.name == "Bat":  # Assuming your bat is named "Bat"
 		#emit_signal("collected")
 
+
+
+
+
+
+
+
+
+
+
+
+
 extends Area2D
 
-signal collected
+signal collected(coin)
 
 func _ready():
-	# Connect only if not already connected
 	if not body_entered.is_connected(_on_body_entered):
 		body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
-	if body.name == "Bat":  # Ensure the player collects the coin
-		emit_signal("collected")
-		queue_free()  # Remove the coin after collection
+	if body.name == "Bat":
+		emit_signal("collected", self)  # Pass 'self' so the main script knows which coin was collected
+		queue_free()
+#extends Area2D
+#
+#signal collected
+#
+#func _ready():
+	## Connect only if not already connected
+	#if not body_entered.is_connected(_on_body_entered):
+		#body_entered.connect(_on_body_entered)
+#
+#func _on_body_entered(body):
+	#if body.name == "Bat":  # Ensure the player collects the coin
+		#emit_signal("collected")
+		#queue_free()  # Remove the coin after collection
