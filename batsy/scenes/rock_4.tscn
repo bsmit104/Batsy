@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://ism5w5r5npph"]
+
+[ext_resource type="Script" path="res://scenes/rock.gd" id="1_l5ros"]
+[ext_resource type="Texture2D" uid="uid://m3gamjc6ejx4" path="res://assets/rockInProgress.png" id="2_cmaad"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q1r8u"]
+size = Vector2(98.75, 1973.5)
+
+[node name="Rock" type="Area2D"]
+script = ExtResource("1_l5ros")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(539, -5446.38)
+scale = Vector2(6, 7.28638)
+texture = ExtResource("2_cmaad")
+offset = Vector2(0, 1000)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(560.392, 7024.97)
+rotation = 3.14159
+scale = Vector2(6.29904, 7.18044)
+texture = ExtResource("2_cmaad")
+offset = Vector2(0, 1000)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(553.3, 1167)
+polygon = PackedVector2Array(12.7, -74, -36.3, -102, -65.3, -110, -81.3, -12, -105.3, 6, -106, 78, -126.3, 187, -168.3, 204, -166, 272, -187.3, 542, -190.3, 1446, 184.7, 1452, 173, 603, 153, 443, 134, 373, 123, 305, 117.7, 0, 68.7, 3)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(551.3, 511)
+rotation = 3.14159
+polygon = PackedVector2Array(12.3002, -69.9999, -66.6998, -100, -69, 78, -83.7, 6.99979, -107.7, 7.99973, -130.701, 195, -167.701, 202, -181.701, 531, -188.704, 1441, 181.296, 1437, 177.299, 534, 173.299, 446, 159.299, 372, 139.299, 305, 119.3, 2.00031, 58.3, 2.00015)
+
+[node name="ScoreArea" type="Area2D" parent="."]
+position = Vector2(5, -34)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(723, 999)
+shape = SubResource("RectangleShape2D_q1r8u")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

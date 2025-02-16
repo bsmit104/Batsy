@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bej7tnaf5ib7h"]
+[gd_scene load_steps=14 format=3 uid="uid://bej7tnaf5ib7h"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_qtou2"]
 [ext_resource type="Texture2D" uid="uid://72tvrltg3ud1" path="res://assets/buttonP.png" id="2_o8ylp"]
 [ext_resource type="Texture2D" uid="uid://dvwk2jyjmcn5k" path="res://assets/Button.png" id="3_b1wof"]
+[ext_resource type="Texture2D" uid="uid://b7uvnkxnplid1" path="res://assets/bar.png" id="4_msgdk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wltmr"]
 texture = ExtResource("2_o8ylp")
@@ -34,46 +35,105 @@ texture = ExtResource("3_b1wof")
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_qtou2")
 
-[node name="Play" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -238.5
-offset_top = -98.5
-offset_right = 238.5
-offset_bottom = 98.5
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 83.0
+offset_top = 343.0
+offset_right = -88.0
+offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_msgdk")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Label" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 100
+text = "LEADERBOARD"
+horizontal_alignment = 1
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+z_index = 2
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -181.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_msgdk")
+patch_margin_left = 10
+patch_margin_top = 1
+patch_margin_right = 10
+patch_margin_bottom = 1
+
+[node name="Play" type="Button" parent="NinePatchRect2"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -151.0
+offset_top = 16.0
+offset_right = 157.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 100
 theme_override_styles/hover = SubResource("StyleBoxTexture_wltmr")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_kdp0n")
 theme_override_styles/normal = SubResource("StyleBoxTexture_sb7s2")
 text = "PLAY"
 
-[node name="Shop" type="Button" parent="."]
-offset_left = 287.0
-offset_top = 1129.0
-offset_right = 785.0
-offset_bottom = 1308.0
+[node name="Shop" type="Button" parent="NinePatchRect2"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 314.0
+offset_bottom = -23.0
+grow_vertical = 2
+theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 100
 theme_override_styles/hover = SubResource("StyleBoxTexture_itu0v")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_eit0g")
 theme_override_styles/normal = SubResource("StyleBoxTexture_vnr6k")
 text = "Shop"
 
-[node name="CharacterSelect" type="Button" parent="."]
-offset_left = 307.0
-offset_top = 1396.0
-offset_right = 769.0
-offset_bottom = 1570.0
+[node name="CharacterSelect" type="Button" parent="NinePatchRect2"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = 16.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 100
 theme_override_styles/hover = SubResource("StyleBoxTexture_xm16f")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_kbcux")
 theme_override_styles/normal = SubResource("StyleBoxTexture_ngr5h")
 text = "Skin"
 
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Shop" to="." method="_on_shop_pressed"]
-[connection signal="pressed" from="CharacterSelect" to="." method="_on_character_select_pressed"]
+[connection signal="pressed" from="NinePatchRect2/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="NinePatchRect2/Shop" to="." method="_on_shop_pressed"]
+[connection signal="pressed" from="NinePatchRect2/CharacterSelect" to="." method="_on_character_select_pressed"]

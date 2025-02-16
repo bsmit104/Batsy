@@ -22,13 +22,13 @@ position = Vector2(1078.75, 1911.5)
 shape = SubResource("RectangleShape2D_m2nbp")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(1076, 90.0001)
+position = Vector2(1076, 220)
 rotation = -3.14159
 scale = Vector2(1, 1.61905)
 texture = ExtResource("1_inorq")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(1074.75, 73.5)
+position = Vector2(1074.75, 203.5)
 rotation = -3.14159
 shape = SubResource("RectangleShape2D_mfrpp")
 
